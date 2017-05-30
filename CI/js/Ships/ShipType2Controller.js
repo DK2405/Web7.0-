@@ -1,8 +1,8 @@
 class ShipType2Controller extends ShipController{
-  constructor(x, y, configs){
+  constructor(x, y, spriteName, configs){
     configs.cooldown = 0.3;
     configs.speed    = 700;
-    super(x, y, "Spaceship2-Player.png", configs);
+    super(x, y, spriteName, configs);
   }
 
   fire(){

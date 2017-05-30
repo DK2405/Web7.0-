@@ -1,8 +1,8 @@
 class ShipType3Controller extends ShipController {
-  constructor(x, y, configs) {
+  constructor(x, y,spriteName, configs) {
     configs.cooldown = 0.4;
     configs.speed = 1000;
-    super(x, y, 'Spaceship3-Player.png', configs);
+    super(x, y, spriteName, configs);
   }
   createBullet(direction) {
     new BulletType3Controller(

@@ -63,16 +63,16 @@ var chooseShipType = function() {
     var userInput = prompt("Enter your spacecraft type\n1:\n2:\n3:");
     switch (userInput) {
       case '1':
-        Nakama.player = new ShipType1Controller(200, 800, player1Controls);
-        Nakama.partner = new ShipType1Controller(400, 800, player2Controls);
+        Nakama.player = new ShipType1Controller(200, 800,'Spaceship1-Player.png', player1Controls);
+        Nakama.partner = new ShipType1Controller(400, 800,'Spaceship1-Partner.png', player2Controls);
         break;
       case '2':
-        Nakama.player = new ShipType2Controller(200, 800, player1Controls);
-        Nakama.partner = new ShipType2Controller(400, 800, player2Controls)
+        Nakama.player = new ShipType2Controller(200, 800,'Spaceship2-Player.png', player1Controls);
+        Nakama.partner = new ShipType2Controller(400, 800,'Spaceship2-Partner.png', player2Controls)
         break;
       case '3':
-        Nakama.player = new ShipType3Controller(200, 800, player1Controls);
-        Nakama.partner = new ShipType3Controller(400, 800, player2Controls)
+        Nakama.player = new ShipType3Controller(200, 800,'Spaceship3-Player.png', player1Controls);
+        Nakama.partner = new ShipType3Controller(400, 800,'Spaceship3-Partner.png', player2Controls)
         break;
       default:
         alert('Invalid input!');
