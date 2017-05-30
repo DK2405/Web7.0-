@@ -1,11 +1,7 @@
-class BulletType1Controller extends BulletController{
-  constructor(x, y, configs){
+class BulletType1Controller extends BulletController {
+  constructor(x, y, configs) {
     configs.BULLET_SPEED = 1500;
-    // var spriteName = 'BulletType1.png';
     super(x, y, 'BulletType1.png', configs);
-    this.sprite.angle = Phaser.Math.radToDeg(Phaser.Math.angleBetween(
-      0, 0,
-      configs.direction.x, configs.direction.y
-    )) + 90;
+    this.sprite.angle = Phaser.Math.radToDeg(Phaser.Math.angleBetween(0, 0, configs.direction.x, configs.direction.y)) + 90;
   }
 }
