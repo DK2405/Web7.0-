@@ -1,8 +1,22 @@
 var Nakama = {};
 Nakama.configs = {
-  PLAYER_SPEED: 10,
+  PLAYER_SPEED: 500,
   BACKGROUND_SPEED: 6,
-  BULLET_SPEED: 1000
+  BULLET_SPEED: 1500,
+  // player1Controls : {
+  //   up        : Phaser.Keyboard.UP,
+  //   down      : Phaser.Keyboard.DOWN,
+  //   left      : Phaser.Keyboard.LEFT,
+  //   right     : Phaser.Keyboard.RIGHT,
+  //   fire      : Phaser.Keyboard.SPACEBAR
+  // },
+  // player2Controls : {
+  //   up        : Phaser.Keyboard.W,
+  //   down      : Phaser.Keyboard.S,
+  //   left      : Phaser.Keyboard.A,
+  //   right     : Phaser.Keyboard.D,
+  //   fire      : Phaser.Keyboard.K
+  // }
 };
 
 window.onload = function() {
@@ -30,47 +44,62 @@ var preload = function() {
 
 }
 
+var chooseShipType = function() {
+  var player1Controls = {
+    up: Phaser.Keyboard.UP,
+    down: Phaser.Keyboard.DOWN,
+    left: Phaser.Keyboard.LEFT,
+    right: Phaser.Keyboard.RIGHT,
+    fire: Phaser.Keyboard.SPACEBAR
+  };
+  var player2Controls = {
+    up: Phaser.Keyboard.W,
+    down: Phaser.Keyboard.S,
+    left: Phaser.Keyboard.A,
+    right: Phaser.Keyboard.D,
+    fire: Phaser.Keyboard.K
+  };
+  do {
+    var userInput = prompt("Enter your spacecraft type\n1:\n2:\n3:");
+    switch (userInput) {
+      case '1':
+        Nakama.player = new ShipType1Controller(200, 400, player1Controls);
+        Nakama.partner = new ShipType1Controller(250, 400, player2Controls);
+        break;
+      case '2':
+        Nakama.player = new ShipType2Controller(200, 400, player1Controls);
+        Nakama.partner = new ShipType2Controller(250, 400, player2Controls)
+        break;
+      case '3':
+        Nakama.player = new ShipType3Controller(200, 400, player1Controls);
+        Nakama.partner = new ShipType3Controller(250, 400, player2Controls)
+        break;
+      default:
+        alert('Invalid input!');
+        break;
+    }
+  } while (userInput < '1' || userInput > '3');
+}
 // initialize the game
 var create = function() {
   Nakama.game.physics.startSystem(Phaser.Physics.ARCADE);
   Nakama.keyboard = Nakama.game.input.keyboard;
 
   Nakama.background = Nakama.game.add.tileSprite(0, 0, 640, 960, 'background');
-
-  Nakama.playerGroup = Nakama.game.add.physicsGroup();
   Nakama.bulletGroup = Nakama.game.add.physicsGroup();
+  Nakama.enemyGroup = Nakama.game.add.physicsGroup();
+  Nakama.playerGroup = Nakama.game.add.physicsGroup();
+
   Nakama.players = [];
-  Nakama.players.push(
-
-    new ShipCotroller(250, 400, 'Spaceship1-Player.png', {
-      up: Phaser.Keyboard.UP,
-      down: Phaser.Keyboard.DOWN,
-      left: Phaser.Keyboard.LEFT,
-      right: Phaser.Keyboard.RIGHT,
-      fire: Phaser.Keyboard.CONTROL
-    })
-  );
-  Nakama.players.push(
-
-    new ShipCotroller(400, 400, 'Spaceship1-Partner.png', {
-      up: Phaser.Keyboard.W,
-      down: Phaser.Keyboard.S,
-      left: Phaser.Keyboard.A,
-      right: Phaser.Keyboard.D,
-      fire: Phaser.Keyboard.SPACEBAR
-    })
-  );
+  chooseShipType();
 }
 
 // update game state each frame| fps: frame per second
 var update = function() {
   Nakama.background.tilePosition.y += Nakama.configs.BACKGROUND_SPEED;
-  for (var i = 0; i < Nakama.players.length; i++) {
-    Nakama.players[i].update();
-  }
-  // Nakama.player.update();
-  // Nakama.partner.update();
-
+  Nakama.game.physics.arcade.collide(Nakama.player, Nakama.partner);
+  Nakama.player.update();
+  Nakama.partner.update();
 }
 
 // before camera render (mostly for debug)
