@@ -16,7 +16,7 @@ class ShipType1Controller extends ShipController {
     new BulletType1Controller(
       this.sprite.position.x,
       this.sprite.position.y,
-      'BulletType1.png', {
+      {
         direction: direction
       }
     );
