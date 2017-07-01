@@ -1,0 +1,25 @@
+.menu {
+  background-color: #D5B0AC;
+  background-position: center;
+  color: #402E2A;
+  font-weight: bold;
+  text-align: center;
+}
+nav:first-child {
+  margin: 25px;
+}
+nav:nth-child(2){
+  width:100px;
+}
+span:hover {
+  background-color:  #9CD08F ;
+}
+span {
+  display: inline-block;
+  width: 100px;
+  height: 30px;
+  padding-top: 10px;
+}
+.menu_vertical > span {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5); /* white border with opacity 50% */
+}
