@@ -1,0 +1,25 @@
+body {
+  padding-top:150px;
+}
+.question {
+  padding: 40px 15px;
+  text-align: center;
+}
+.content p {
+  font-size: 30px;
+  margin-bottom: 60px;
+}
+
+.result {
+  font-size: 30px;
+  margin-bottom: 60px;
+}
+a, a:hover {
+  text-decoration: none;
+  color: #ffffff;
+}
+.question-page label {
+  font-size : 30px;
+  text-align: left;
+  margin-left: 0;
+}
